@@ -1,0 +1,46 @@
+
+# Activate the mmdet environment
+conda activate mmdet
+
+# Navigate to project directory
+cd /path/to/mmdet-nwdrka
+
+# Experiment 1: Normal Data + Attention + Faster R-CNN
+python tools/train.py configs/my_experiments/exp1_normal_attn_faster_rcnn.py
+
+# Experiment 2: Super-res Data + Attention + Faster R-CNN
+python tools/train.py configs/my_experiments/exp2_super_attn_faster_rcnn.py
+
+# Experiment 3: Normal Data + IoU-based Ranked Method
+python tools/train.py configs/my_experiments/exp3_normal_iou_ranked.py
+
+# Experiment 4: Normal Data + NWDRKA Method
+python tools/train.py configs/my_experiments/exp4_normal_nwdrka.py
+
+# Test Experiment 1
+python tools/test.py configs/my_experiments/exp1_normal_attn_faster_rcnn.py \
+    work_dirs/exp1_normal_attn_faster_rcnn/latest.pth \
+    --eval bbox \
+    --out work_dirs/exp1_normal_attn_faster_rcnn/results.pkl \
+    | tee work_dirs/exp1_normal_attn_faster_rcnn/test_log.txt
+
+# Test Experiment 2
+python tools/test.py configs/my_experiments/exp2_super_attn_faster_rcnn.py \
+    work_dirs/exp2_super_attn_faster_rcnn/latest.pth \
+    --eval bbox \
+    --out work_dirs/exp2_super_attn_faster_rcnn/results.pkl \
+    | tee work_dirs/exp2_super_attn_faster_rcnn/test_log.txt
+
+# Test Experiment 3
+python tools/test.py configs/my_experiments/exp3_normal_iou_ranked.py \
+    work_dirs/exp3_normal_iou_ranked/latest.pth \
+    --eval bbox \
+    --out work_dirs/exp3_normal_iou_ranked/results.pkl \
+    | tee work_dirs/exp3_normal_iou_ranked/test_log.txt
+
+# Test Experiment 4
+python tools/test.py configs/my_experiments/exp4_normal_nwdrka.py \
+    work_dirs/exp4_normal_nwdrka/latest.pth \
+    --eval bbox \
+    --out work_dirs/exp4_normal_nwdrka/results.pkl \
+    | tee work_dirs/exp4_normal_nwdrka/test_log.txt

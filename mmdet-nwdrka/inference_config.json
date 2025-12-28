@@ -1,0 +1,41 @@
+{
+  "input_image_folder": "data/halep",
+  "output_root": "workdir/autolabel_run",
+  "tile": {
+    "width": 300,
+    "height": 300,
+    "stride": 300,
+    "tile_output_dir": "data/halep_tiled"
+  },
+  "model": {
+    "config_file": "workdir/tuzla/aitodv2train_faster_r50_nwdrka_1x.py",
+    "checkpoint_file": "workdir/tuzla/epoch_200.pth",
+    "device": "cuda:0",
+    "cfg_options": {
+      "data_root": "data/tuesday_nato/dataset_tiled_overlap",
+      "data.test.pipeline.0.type": "LoadImageFromFile",
+      "model.test_cfg.rcnn.score_thr": 0.80,
+      "model.test_cfg.rcnn.nms.iou_threshold": 0.80,
+      "model.test_cfg.rcnn.max_per_img": 1
+    }
+  },
+  "inference": {
+    "pickle_path": "workdir/tuesday_nato/predictions_result.pkl"
+  },
+  "stitch": {
+    "iou_thresh": 0.90,
+    "stitched_json": "workdir/tuesday_nato/stitched_results.json"
+  },
+  "categories": {
+    "0": "mine"
+  },
+  "export": {
+    "coco_output_json": "workdir/tuesday_nato/fixed_annotations_full.json",
+    "tiled_coco_output_json": "data/tuesday_nato/dataset_tiled_overlap/fixed_annotations_tiled.json"
+  },
+  "cache": {
+    "offset_map_json": "workdir/tuesday_nato/offset_map.json",
+    "dimensions_json": "workdir/tuesday_nato/dimensions.json",
+    "tiles_metadata_json": "workdir/tuesday_nato/tiles_metadata.json"
+  }
+}

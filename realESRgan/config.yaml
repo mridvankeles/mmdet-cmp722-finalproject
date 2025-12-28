@@ -1,0 +1,26 @@
+# Dataset ve giriş/çıkış klasörleri
+images_dir: "../mmdet-nwdrka/data/aitod_dataset/images/val"
+tiles_dir: "../mmdet-nwdrka/data/aitod_dataset/images/val_tiled"
+sr_tiles_dir:  "../mmdet-nwdrka/data/aitod_dataset/images/val_tiled_sr"
+stitched_dir: "../mmdet-nwdrka/data/aitod_dataset/stitched_val"
+annotation_full: "../mmdet-nwdrka/data/aitod_dataset/annotation_full"
+coco_json_path: "../mmdet-nwdrka/data/aitod_dataset/annotation_full/aitod_val.json"
+
+# Tile ayarları
+tile_size: 200
+stride: 200
+image_suffix: ".png"       
+output_format: "png"      
+skip_empty_tiles: true
+empty_tile_black_threshold: 5
+empty_tile_min_nonblack_ratio: 0.005
+empty_tile_min_stddev: 0.0
+
+# Super Resolution model ve parametreler
+model_path: "models/net_g_latest.pth" # "/home/lenovo/Downloads/RealESRGAN_script/models/net_g_latest.pth"
+scale: 4  # 1birimlik LR için 4 birimlik SR (256x256 LR için 1024x1024 SR)
+device: "cuda:0" #cuda 
+downscale_after_stitch: True
+downscale_target: 800
+
+stitch_ext: ".png"

@@ -1,0 +1,23 @@
+# Core utilities
+cython<3
+yapf==0.40.1
+
+# PyTorch (CUDA 11.7 build, adjust if your GPU/driver uses another CUDA)
+torch==1.13.1+cu117
+torchvision==0.14.1+cu117
+torchaudio==0.13.1
+--extra-index-url https://download.pytorch.org/whl/cu117
+
+# OpenMMLab stack
+mmcv-full==1.7.1
+mmdet==2.24.1
+openmim
+
+# COCO API for AITOD
+#git+https://github.com/Chasel-Tsui/cocoapi-aitod.git#subdirectory=aitodpycocotools
+
+# Project requirements
+-r requirements/build.txt
+-r requirements/runtime.txt
+-r requirements/optional.txt
+
