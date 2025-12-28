@@ -1,8 +1,0 @@
-python tools/test.py \
-    workdir/faster \
-    <PATH_TO_CHECKPOINT> \
-    --cfg-options \
-    data.test.img_prefix='<PATH_TO_YOUR_IMAGE_FOLDER>' \
-    data.test.ann_file='data/dummy.json' \
-    --format-only \
-    --out <OUTPUT_PREDICTION_FILE>.pkl
