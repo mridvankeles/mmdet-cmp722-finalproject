@@ -8,6 +8,16 @@ This repository contains the implementation and results for the paper: **"Enhanc
 
 ---
 
+## Demo Video
+
+[![Demo Video](https://img.youtube.com/vi/za_9q8NlhoM/0.jpg)](https://youtu.be/za_9q8NlhoM)
+
+**Watch the demo:** https://youtu.be/za_9q8NlhoM
+
+This video summarizes the project workflow and core components. Our implementation is built on the MMDetection framework with a custom CSAM (Channel-Spatial Attention Module) plugin integrated into the detection backbone. The video demonstrates the end-to-end Super-Resolution pipeline and showcases inference results from our CSAM-enhanced model with NWDRKA on aerial imagery.
+
+---
+
 ## Overview
 
 This project focuses on **tiny object detection in aerial images** using the AI-TOD-v2 dataset. We implement and compare various detection methods with enhancements including:
