@@ -323,9 +323,9 @@ Illustrates performance on scenes with sparse object distribution. NWD+RKA parti
 
 Example of a complex scene with multiple object scales. The progression from top-left to bottom-right shows clear improvement in both recall and precision.
 
-**Panel 7: `panel_0000244_05400_d_000012__160_0.png`**
+**Panel 7: `panel_0000244_05400_d_0000012__160_0.png`**
 
-![Panel 0000244](figures/qual_panels/panel_0000244_05400_d_000012__160_0.png)
+![Panel 0000244](figures/qual_panels/panel_0000244_05400_d_0000012__160_0.png)
 
 Demonstrates the importance of stable assignment (NWD+RKA) for very tiny objects that are easily missed or misclassified.
 
