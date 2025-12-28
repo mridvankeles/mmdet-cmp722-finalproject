@@ -259,24 +259,113 @@ python tools/test.py configs_nwdrka/nwd_rka/aitod_super_faster_r50_csam_nwdrka_1
 
 ### Qualitative Comparison Panels
 
-The `figures/qual_panels/` directory contains **8 automatically selected panels** showing 2×2 comparisons of four detection configurations:
+The `figures/qual_panels/` directory contains **8 automatically selected panels** showing 2×2 comparisons of four detection configurations. Each panel is a composite image demonstrating how different methods perform on the same validation scene.
 
-- **Top-left**: IoU baseline
-- **Top-right**: NWD+RKA
-- **Bottom-left**: CSAM + IoU
-- **Bottom-right**: CSAM + NWD+RKA (best)
+#### Panel Layout
 
-**Panels used in paper:**
-- `panel_02029.png` - Figure 2, left panel
-- `panel_107__600_600.png` - Figure 2, right panel
+Each panel is organized as a 2×2 grid:
 
-**Additional panels:** 6 more examples demonstrating similar trends
+```
+┌─────────────────┬─────────────────┐
+│   IoU Baseline  │   NWD+RKA       │
+│   (top-left)    │   (top-right)   │
+├─────────────────┼─────────────────┤
+│   CSAM + IoU    │   CSAM + NWD+RKA│
+│   (bottom-left) │   (bottom-right) │
+└─────────────────┴─────────────────┘
+```
 
-### Key Observations
+#### Panels from Paper (Figure 2)
 
-- **NWD+RKA**: Recovers additional tiny instances missed by IoU
-- **CSAM**: Reduces clutter-driven spurious detections
-- **Combined**: Best balance of recall and precision
+**Panel 1: `panel_02029.png`** (Figure 2, left panel)
+
+![Panel 02029](figures/qual_panels/panel_02029.png)
+
+This panel demonstrates a typical aerial scene with multiple small objects. Key observations:
+- **IoU baseline (top-left)**: Misses several tiny objects, especially in dense areas
+- **NWD+RKA (top-right)**: Recovers additional tiny instances that IoU missed, showing improved recall
+- **CSAM + IoU (bottom-left)**: Reduces some false positives but still misses tiny objects
+- **CSAM + NWD+RKA (bottom-right)**: Best configuration - combines improved recall (from NWD+RKA) with reduced false positives (from CSAM)
+
+**Panel 2: `panel_107__600_600.png`** (Figure 2, right panel)
+
+![Panel 107](figures/qual_panels/panel_107__600_600.png)
+
+This panel shows a different scene type with varying object sizes. Observations:
+- **IoU baseline**: Struggles with very small objects and produces some false positives
+- **NWD+RKA**: Better detection of tiny objects, but may introduce a few false positives
+- **CSAM + IoU**: Good precision but misses some tiny targets
+- **CSAM + NWD+RKA**: Optimal balance - detects more tiny objects while maintaining high precision
+
+#### Additional Example Panels
+
+**Panel 3: `panel_00844.png`**
+
+![Panel 00844](figures/qual_panels/panel_00844.png)
+
+Demonstrates performance on a scene with moderate object density. The combined method (CSAM + NWD+RKA) shows the cleanest results with good coverage of all object sizes.
+
+**Panel 4: `panel_01979.png`**
+
+![Panel 01979](figures/qual_panels/panel_01979.png)
+
+Shows how different methods handle cluttered backgrounds. CSAM helps reduce false positives from background patterns, while NWD+RKA improves detection of genuinely small targets.
+
+**Panel 5: `panel_00761707d.png`**
+
+![Panel 00761707d](figures/qual_panels/panel_00761707d.png)
+
+Illustrates performance on scenes with sparse object distribution. NWD+RKA particularly shines here by detecting objects that IoU-based methods miss.
+
+**Panel 6: `panel_0000133_00078_d_0000141__0_0.png`**
+
+![Panel 0000133](figures/qual_panels/panel_0000133_00078_d_0000141__0_0.png)
+
+Example of a complex scene with multiple object scales. The progression from top-left to bottom-right shows clear improvement in both recall and precision.
+
+**Panel 7: `panel_0000244_05400_d_000012__160_0.png`**
+
+![Panel 0000244](figures/qual_panels/panel_0000244_05400_d_000012__160_0.png)
+
+Demonstrates the importance of stable assignment (NWD+RKA) for very tiny objects that are easily missed or misclassified.
+
+**Panel 8: `panel_0000270_03801_d_0000372__0_0.png`**
+
+![Panel 0000270](figures/qual_panels/panel_0000270_03801_d_0000372__0_0.png)
+
+Shows how attention mechanisms (CSAM) help the model focus on relevant features and suppress background noise.
+
+### Key Observations from Panels
+
+1. **NWD+RKA Benefits:**
+   - **Improved recall** for very tiny objects (often missed by IoU)
+   - Better handling of objects near detection boundaries
+   - More stable positive sample assignment during training
+   - Particularly effective for objects < 16×16 pixels
+
+2. **CSAM Benefits:**
+   - **Reduced false positives** from background clutter
+   - Better feature selectivity for weak target cues
+   - Improved discrimination between objects and background
+   - Helps with medium-sized objects as well
+
+3. **Combined Configuration (CSAM + NWD+RKA):**
+   - **Best overall performance**: Highest mAP (0.108) and lowest oLRP (0.875)
+   - Balances improved recall (from NWD+RKA) with reduced false positives (from CSAM)
+   - Most consistent detection quality across different scene types
+   - Handles both sparse and dense object distributions well
+
+### Method Overview Diagram
+
+![NWD-RKA Method](figures/nwdrka.PNG)
+
+This diagram illustrates the Normalized Wasserstein Distance and Ranking-based Assigning strategy (NWD-RKA) approach for tiny object detection.
+
+### Dataset Comparison
+
+![Dataset Comparison](figures/fps2.gif)
+
+Animation showing the comparison between AI-TOD and AI-TOD-v2 datasets, highlighting improvements in annotation quality and coverage.
 
 ---
 
